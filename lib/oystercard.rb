@@ -4,12 +4,13 @@ class Oystercard
   MINIMUM_TRAVEL_BALANCE = 1
 
 
-  attr_reader :balance
+  attr_reader :balance, :fare
 
 
-  def initialize
+  def initialize(fare=MINIMUM_TRAVEL_BALANCE)
     @balance = 0
     @in_transit = false
+    @fare = fare
   end
 
   def top_up(money)
@@ -32,6 +33,15 @@ class Oystercard
 
   def touch_out
     @in_transit = false
+    deduct(fare)
+  end
+
+  private
+
+  attr_writer :deduct, :balance
+
+  def deduct(fare)
+    @balance -= fare
   end
 
 end
