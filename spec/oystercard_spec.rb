@@ -28,4 +28,23 @@ describe Oystercard do
       expect { oystercard.deduct 5}.to change{ oystercard.balance }.by -5
     end
   end
+
+  describe '#touch_in' do
+    it 'changes card journey state to in transit when touching in' do
+      oystercard.touch_in
+      expect(oystercard.in_journey?).to eq true
+    end
+  end
+
+  describe '#in_journey?' do
+    it {is_expected.to respond_to :in_journey?}
+  end
+
+  describe 'touch_out' do
+    it 'changes card journey state to journey ended when touching out' do
+      oystercard.touch_in
+      oystercard.touch_out
+      expect(oystercard.in_journey?).to eq false
+    end
+  end
 end
