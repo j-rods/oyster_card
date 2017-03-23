@@ -2,22 +2,13 @@ require_relative 'station'
 require_relative 'journey'
 
 class Oystercard
-
   MAXIMUM_BALANCE = 90
   MINIMUM_TRAVEL_BALANCE = 1
-  PENALTY_CHARGE = 6
 
-
-  attr_reader :balance, :fare, :entry_station, :exit_station, :in_use, :journey_history, :journey
-
+  attr_reader :balance, :journey_history, :journey
 
   def initialize
     @balance = 0
-    @fare = MINIMUM_TRAVEL_BALANCE
-    @entry_station = nil
-    @exit_station = nil
-    @in_use = false
-    # @track_journey = nil
     @journey_history = []
   end
 
@@ -28,10 +19,6 @@ class Oystercard
 
   def touch_in(station)
     fail "Insufficient funds. £1 minimum needed to travel." if @balance < MINIMUM_TRAVEL_BALANCE
-    # is track true?
-    #   apply penalty fare and continue journey as usual
-
-    # @track_journey = true
     if defined?(journey.fare)
       deduct(journey.fare)
     else
@@ -44,7 +31,6 @@ class Oystercard
     self.journey.end_journey(station)
     deduct(journey.fare)
     self.add_to_journey_history(station)
-    # @track_journey = false / add to journey - apply fare
   end
 
   def add_to_journey_history(station)
@@ -53,7 +39,7 @@ class Oystercard
 
   private
 
-  attr_writer :deduct, :balance, :exit_station, :in_use, :journey
+  attr_writer :deduct, :balance
 
   def deduct(fare)
     @balance -= fare

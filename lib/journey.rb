@@ -30,7 +30,7 @@ class Journey
   end
 
   def complete?
-  ended
+    ended
   end
 
   private
