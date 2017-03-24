@@ -10,23 +10,35 @@ describe Journey do
         expect(journey.entry_station).to eq station
       end
 
+      # it 'sets an entry station' do 
+        
+
+      # end
+
       describe '#start_journey' do
         it 'tracks a new journey' do
           journey.start_journey
           expect(journey.ended).to be false
         end
       end
+
     end
   end
 
   describe '#end_journey' do
-    it 'ends the journey' do
-      journey.end_journey(station)
-      expect(journey.ended).to be true
-    end
+    context 'when ending a journey' do 
+      it 'ends the journey' do
+        journey.end_journey(station)
+        expect(journey.ended).to be true
+      end
 
-    it 'returns itself when exiting journey' do
-      expect(journey.end_journey(station)).to eq(journey)
+      it 'returns itself when exiting journey' do
+        expect(journey.end_journey(station)).to eq(journey)
+      end
+
+      it 'returns a station exit' do
+        expect(journey.exit_station=station).to eq station
+      end 
     end
   end
 
