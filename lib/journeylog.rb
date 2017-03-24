@@ -6,4 +6,13 @@ class JourneyLog
     @journey_log
   end
 
+  def start(entry_station)
+  	entry_station
+  end
+
+  #private
+
+  def current_journey
+  end
+
 end
