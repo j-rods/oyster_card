@@ -6,12 +6,6 @@ describe JourneyLog do
 
   let(:journey) { double(:journey_class) }
 
-  # describe 'Class initialization' do
-  #   it 'Creates journey log class' do
-  #     expect(journey_log).to
-  #   end
-  # end
-
   describe '#start' do
   	it'starts a journey' do
   	  expect(journeylog.start(entry_station)).to eq entry_station
@@ -19,9 +13,15 @@ describe JourneyLog do
   end
 
   describe '#current_journey' do
-  	it'returns incomplete journey or creates new journey' do
-  	  expect(journeylog.current_journey).to eq nil
+  	it'returns incomplete journey' do 
+      expect(journeylog.current_journey).to eq "Incomplete journey"
   	end
+    
+    it 'creates new journey' do
+      journeylog.start(entry_station)	
+  	  expect(journeylog.current_journey).to eq entry_station
+  	end
+
   end
 
   describe '#finish' do
